@@ -2,7 +2,10 @@ behaviour("LimitRespawn")
 
 __cached_actors = {}
 
+__player_weigth = 9999
+
 function LimitRespawn:Start()
+	__player_weigth = self.script.mutator.GetConfigurationInt('player-weigth')
 	GameEvents.onActorSpawn.AddListener(self, "OnActorSpawn")
 	print('Script loaded!')
 end
@@ -55,15 +58,21 @@ function LimitRespawn:OnActorSpawn(actor)
 	-- Calculate the balance between teams, having into account that the actor team add while the other teams substracts
 	balance = 0
 	for index, aux_actor in pairs(actors) do
+		actor_effect = 1
+		if not aux_actor.isBot then
+			actor_effect = __player_weigth
+		end
+
 		if aux_actor.team == actor.team then
-			balance = balance + 1
+			balance = balance + actor_effect
 		else
-			balance = balance - 1
+			balance = balance - actor_effect
 		end
 	end
 
 	-- If the point is in a tie or being captured kill silently the spawned bot
 	if balance < 0 then
 		actor.KillSilently()
+		print('Avoided '..actor.name..' respawn at '..spawnPoint.name..)
 	end
 end
