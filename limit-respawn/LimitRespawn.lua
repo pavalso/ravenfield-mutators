@@ -1,4 +1,5 @@
 -- Licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+-- https://github.com/pavalso/ravenfield-mutators/blob/main/limit-respawn/LimitRespawn.lua
 
 behaviour("LimitRespawn")
 
