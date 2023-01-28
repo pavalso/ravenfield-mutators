@@ -73,6 +73,6 @@ function LimitRespawn:OnActorSpawn(actor)
 	-- If the point is in a tie or being captured kill silently the spawned bot
 	if balance < 0 then
 		actor.KillSilently()
-		print('Avoided '..actor.name..' respawn at '..spawnPoint.name..)
+		print('Avoided '..actor.name..' respawn at '..spawnPoint.name)
 	end
 end
